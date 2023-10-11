@@ -32,7 +32,7 @@ from flask_login import (
 
 
 app = Flask(__name__)
-app.secret_key = 'dev'
+app.secret_key = 'dev_secret'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
@@ -59,7 +59,41 @@ db = SQLAlchemy(app)
 csrf = CSRFProtect(app)
 bcrypt = Bcrypt()
 
-
+class BootswatchForm(FlaskForm):
+    """Form to test Bootswatch."""
+    #DO NOT EDIT! Use list-bootswatch.py to generate the Radiofield below.
+    theme_name = RadioField(
+        default='default',
+        choices=[
+            ('default', 'none'),
+            ('cerulean', 'Cerulean 5.3.1'),
+            ('cosmo', 'Cosmo 5.3.1'),
+            ('cyborg', 'Cyborg 5.3.1'),
+            ('darkly', 'Darkly 5.3.1'),
+            ('flatly', 'Flatly 5.3.1'),
+            ('journal', 'Journal 5.3.1'),
+            ('litera', 'Litera 5.3.1'),
+            ('lumen', 'Lumen 5.3.1'),
+            ('lux', 'Lux 5.3.1'),
+            ('materia', 'Materia 5.3.1'),
+            ('minty', 'Minty 5.3.1'),
+            ('morph', 'Morph 5.3.1'),
+            ('pulse', 'Pulse 5.3.1'),
+            ('quartz', 'Quartz 5.3.1'),
+            ('sandstone', 'Sandstone 5.3.1'),
+            ('simplex', 'Simplex 5.3.1'),
+            ('sketchy', 'Sketchy 5.3.1'),
+            ('slate', 'Slate 5.3.1'),
+            ('solar', 'Solar 5.3.1'),
+            ('spacelab', 'Spacelab 5.3.1'),
+            ('superhero', 'Superhero 5.3.1'),
+            ('united', 'United 5.3.1'),
+            ('vapor', 'Vapor 5.3.1'),
+            ('yeti', 'Yeti 5.3.1'),
+            ('zephyr', 'Zephyr 5.3.1'),
+        ]
+    )
+    submit = SubmitField()
 
 
 @login_manager.user_loader
@@ -160,6 +194,13 @@ def register():
 def logout():
     logout_user()
     return redirect(url_for('login'))
+
+
+@app.route("/collections")
+@login_required
+def collections():
+    
+    return render_template('collections.html')
 
 @app.route('/form', methods=['GET', 'POST'])
 def test_form():

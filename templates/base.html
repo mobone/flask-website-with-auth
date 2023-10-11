@@ -29,6 +29,8 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <img src="{{ url_for('static', filename='favicon.ico') }}" width="50" height="50">
+            <b>&nbsp&nbspMTGSorter&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</b>
             <ul class="navbar-nav mr-auto">
                 {{ render_nav_item('index', 'Home') }}
                 {{ render_nav_item('test_form', 'Form') }}
@@ -40,7 +42,7 @@
                 {{ render_nav_item('test_icon', 'Icon') }}
                 {{ render_nav_item('test_icons', 'Icons') }}
                 {% if current_user.is_authenticated %}
-                    
+                    {{ render_nav_item('collections', 'Collections') }}
                     {{ render_nav_item('logout', 'Logout') }}
                 {% else %}
                     {{ render_nav_item('login', 'Login') }}
